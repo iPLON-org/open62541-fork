@@ -408,6 +408,7 @@ getConditionBranchNodeId(UA_Server *server, const UA_ByteString *eventId,
     /* The function checks the BranchId based on the event Id, if BranchId ==
        NULL -> outConditionId = ConditionId */
     /* Get ConditionSource Entry */
+    UA_StatusCode res = UA_STATUSCODE_BADEVENTIDUNKNOWN;    
     UA_ConditionSource *source;
     LIST_FOREACH(source, &server->conditionSources, listEntry) {
         /* Get Condition Entry */
@@ -419,13 +420,15 @@ getConditionBranchNodeId(UA_Server *server, const UA_ByteString *eventId,
                 if(!UA_ByteString_equal(&branch->lastEventId, eventId))
                     continue;
                 if(UA_NodeId_isNull(&branch->conditionBranchId))
-                    return UA_NodeId_copy(&cond->conditionId, outConditionBranchNodeId);
-                return UA_NodeId_copy(&branch->conditionBranchId, outConditionBranchNodeId);
+                    res = UA_NodeId_copy(&cond->conditionId, outConditionBranchNodeId);
+                else
+                    res = UA_NodeId_copy(&branch->conditionBranchId, outConditionBranchNodeId);
+                goto out;
             }
         }
     }
-
-    return UA_STATUSCODE_BADEVENTIDUNKNOWN;
+ out:
+    return res;
 }
 
 static UA_StatusCode
