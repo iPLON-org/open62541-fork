@@ -419,8 +419,10 @@ getConditionBranchNodeId(UA_Server *server, const UA_ByteString *eventId,
                 if(!UA_ByteString_equal(&branch->lastEventId, eventId))
                     continue;
                 if(UA_NodeId_isNull(&branch->conditionBranchId))
-                    return UA_NodeId_copy(&cond->conditionId, outConditionBranchNodeId);
-                return UA_NodeId_copy(&branch->conditionBranchId, outConditionBranchNodeId);
+                    res = UA_NodeId_copy(&cond->conditionId, outConditionBranchNodeId);
+                else
+                    res = UA_NodeId_copy(&branch->conditionBranchId, outConditionBranchNodeId);
+                goto out;
             }
         }
     }

@@ -72,12 +72,18 @@ const UA_ConnectionConfig UA_ConnectionConfig_default = {
 /* Default Server Settings */
 /***************************/
 
-#define MANUFACTURER_NAME "open62541"
-#define PRODUCT_NAME "open62541 OPC UA Server"
-#define PRODUCT_URI "http://open62541.org"
-#define APPLICATION_NAME "open62541-based OPC UA Application"
+// #define MANUFACTURER_NAME "open62541"
+// #define PRODUCT_NAME "open62541 OPC UA Server"
+// #define PRODUCT_URI "http://open62541.org"
+// #define APPLICATION_NAME "open62541-based OPC UA Application"
+#define MANUFACTURER_NAME "Exyte"
+#define PRODUCT_NAME "CrisXT OPC UA Server"
+#define PRODUCT_URI "http://xtopcua.org"
+#define APPLICATION_NAME "CrisXT OPC UA Application"
+
 #define APPLICATION_URI "urn:unconfigured:application"
-#define APPLICATION_URI_SERVER "urn:open62541.server.application"
+// #define APPLICATION_URI_SERVER "urn:open62541.server.application"
+#define APPLICATION_URI_SERVER "urn:xtopcua.server.application"
 
 #define STRINGIFY(arg) #arg
 #define VERSION(MAJOR, MINOR, PATCH, LABEL) \
